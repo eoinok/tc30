@@ -15,4 +15,4 @@ jobs:
           key: ${{ secrets.SSH_B00005555_PRIVATE }}
           known_hosts: ${{ secrets.SSH_HOST }}
       - name: Deploy with rsync
-        run: ssh B00005555@209.222.30.54 './deploy.sh https://eoinok:mHni100wd@github.com/eoinok/tc30.git'
+        run: ssh ${{ secrets.UBUNTU_USER }}@209.222.30.54 './deploy.sh https://eoinok:${{ secrets.GITHUB_PWD }}@github.com/eoinok/tc30.git'
