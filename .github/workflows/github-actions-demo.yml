@@ -16,4 +16,4 @@ jobs:
           known_hosts: ${{ secrets.SSH_HOST }}
       - name: Deploy with rsync
         #run: rsync -avz ./tc30 B00005555@209.222.30.54:/home/B00005555/B00005555
-        ls -al
+        run: ls -al
