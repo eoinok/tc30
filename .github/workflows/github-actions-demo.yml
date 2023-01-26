@@ -12,7 +12,7 @@ jobs:
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+          key: ${{ secrets.SSH_B00005555_PRIVATE }}
+          known_hosts: ${{ secrets.SSH_HOST }}
       - name: Deploy with rsync
         run: rsync -avz ./dist/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/B00005555/B00005555
