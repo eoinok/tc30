@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Adding Known Hosts
+        run: mkdir ~/.ssh
         run: ssh-keyscan -H 209.222.30.54 >> ~/.ssh/known_hosts
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
