@@ -8,11 +8,11 @@ jobs:
       - name: make .ssh folder
         run: mkdir ~/.ssh
       - name: Add known hosts file
-        run: ssh-keyscan -H 209.222.30.54 >> ~/.ssh/known_hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
-          key: ${{ secrets.SSH_B00005555_PRIVATE }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.SSH_HOST }}
-      - name: Deploy with rsync
-        run: ssh ${{ secrets.UBUNTU_USER }}@209.222.30.54 './deploy.sh https://eoinok:${{ secrets.GH_PWD }}@github.com/eoinok/tc30.git'
+      - name: remote execute deploy script
+        run: ssh ${{ secrets.HOST_USER }}@${{ secrets.HOST_SERVER }} './deploy.sh https://${{ github.repository_owner }}:${{ secrets.GH_PWD }}@github.com/${{ github.repository }}.git'
