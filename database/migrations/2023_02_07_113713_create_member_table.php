@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('surname', 30)->nullable();
             $table->string('membertype', 6)->nullable();
             $table->date('dateofbirth')->nullable();
+			$table->binary('image')->nullable();
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('deleted_at')->nullable();
