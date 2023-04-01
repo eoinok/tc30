@@ -22,3 +22,5 @@
     <p>{{ $member->dateofbirth }}</p>
 </div>
 
+
+

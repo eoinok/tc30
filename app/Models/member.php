@@ -9,13 +9,15 @@ use Illuminate\Database\Eloquent\Model as Model;
 /**
  * Class member
  * @package App\Models
- * @version February 1, 2023, 10:28 am UTC
+ * @version February 17, 2023, 4:12 pm UTC
  *
  * @property \Illuminate\Database\Eloquent\Collection $bookings
+ * @property \Illuminate\Database\Eloquent\Collection $memberimages
  * @property string $firstname
  * @property string $surname
  * @property string $membertype
  * @property string $dateofbirth
+ * @property string $memberimage
  */
 class member extends Model
 {
@@ -33,7 +35,8 @@ class member extends Model
         'firstname',
         'surname',
         'membertype',
-        'dateofbirth'
+        'dateofbirth',
+        'memberimage'
     ];
 
     /**
@@ -46,7 +49,8 @@ class member extends Model
         'firstname' => 'string',
         'surname' => 'string',
         'membertype' => 'string',
-        'dateofbirth' => 'date'
+        'dateofbirth' => 'date',
+        'memberimage' => 'string'
     ];
 
     /**
@@ -58,7 +62,8 @@ class member extends Model
         'firstname' => 'nullable|string|max:30',
         'surname' => 'nullable|string|max:30',
         'membertype' => 'nullable|string|max:6',
-        'dateofbirth' => 'nullable'
+        'dateofbirth' => 'nullable',
+        'memberimage' => 'nullable|string'
     ];
 
     /**
@@ -67,5 +72,13 @@ class member extends Model
     public function bookings()
     {
         return $this->hasMany(\App\Models\Booking::class, 'memberid');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function memberimages()
+    {
+        return $this->hasMany(\App\Models\Memberimages::class, 'memberid');
     }
 }

@@ -25,3 +25,18 @@ require __DIR__.'/auth.php';
 
 
 Route::resource('members', App\Http\Controllers\memberController::class);
+
+
+Route::resource('memberimages', App\Http\Controllers\memberimagesController::class);
+
+Route::get('member/newimages/{memberid}', 'App\Http\Controllers\memberimagesController@create')->name('member.newimages');
+
+Route::get('member/search','App\Http\Controllers\MemberController@search')->name('member.search');
+Route::get('member/searchform', 'App\Http\Controllers\MemberController@searchform')->name('member.searchform');
+
+Route::get('calendar/display', 'App\Http\Controllers\CalendarController@display')->name('calendar.display');
+
+Route::resource('courts', App\Http\Controllers\courtController::class);
+
+Route::get('/courts/all/json', 'App\Http\Controllers\courtController@json')->name('courts.map.json');
+Route::get('/courts/show/map', 'App\Http\Controllers\courtController@showmap')->name('courts.showmap');

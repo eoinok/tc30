@@ -15,6 +15,34 @@ class memberController extends AppBaseController
     /** @var memberRepository $memberRepository*/
     private $memberRepository;
 
+    public function search(Request $request)
+    {
+        $output="";
+        if($request->ajax()) {       
+            $members=\App\Models\member::where('surname','LIKE','%'.$request->search."%")->get();
+            if($members->count()>0) {
+                foreach ($members as $member) {
+                    $output='<tr>';
+                    $output=$output . '<td>'.$member->id.'</td>';
+                    $output=$output . '<td>'.$member->firstname.'</td>';
+                    $output=$output . '<td>'.$member->surname.'</td>';
+                    $output=$output . '<td>'.$member->membertype.'</td>';
+                    $output=$output . '</tr>'; 
+                }
+                return Response($output);
+            }
+            return Response("No Match");
+        }
+        else {
+            return Response("error");
+        } 
+    }
+    
+    public function searchform()
+    {
+        return view('members.search');
+    }
+    
     public function __construct(memberRepository $memberRepo)
     {
         $this->memberRepository = $memberRepo;
@@ -29,6 +57,7 @@ class memberController extends AppBaseController
      */
     public function index(Request $request)
     {
+        //$members=\App\Models\member::where('firstname','LIKE','%b%')->get();
         $members = $this->memberRepository->all();
 
         return view('members.index')
@@ -73,6 +102,7 @@ class memberController extends AppBaseController
     public function show($id)
     {
         $member = $this->memberRepository->find($id);
+        $memberimages = $member->memberimages;
 
         if (empty($member)) {
             Flash::error('Member not found');
@@ -80,7 +110,7 @@ class memberController extends AppBaseController
             return redirect(route('members.index'));
         }
 
-        return view('members.show')->with('member', $member);
+        return view('members.show')->with('member', $member)->with('memberimages',$memberimages);;
     }
 
     /**
